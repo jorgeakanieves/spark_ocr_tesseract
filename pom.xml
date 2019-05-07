@@ -1,0 +1,298 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <groupId>com.jene</groupId>
+    <artifactId>job-ocr-pdf</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <name>cognitive-orc-pdf</name>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+
+    <properties>
+        <spark.version>1.6.0</spark.version>
+        <scala.version>2.10.4</scala.version>
+        <scala.binary.version>2.10</scala.binary.version>
+        <java.version>1.7</java.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>apache-repo</id>
+            <name>Apache Repository</name>
+            <url>https://repository.apache.org/content/repositories/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>cloudera-repo-releases</id>
+            <url>https://repository.cloudera.com/artifactory/repo/</url>
+        </repository>
+        <repository>
+            <id>maven.aspose.com</id>
+            <name>maven.aspose.com-releases</name>
+            <url>http://maven.aspose.com/artifactory/ext-release-local</url>
+        </repository>
+
+        <repository>
+            <id>org.ghost4j.repository.releases</id>
+            <name>Ghost4J releases</name>
+            <url>http://repo.ghost4j.org/maven2/releases</url>
+        </repository>
+        <repository>
+            <id>org.ghost4j.repository.snapshots</id>
+            <name>Ghost4J snapshots</name>
+            <url>http://repo.ghost4j.org/maven2/snapshots</url>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+        <dependency> <!-- Scala -->
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+
+        <dependency> <!-- Core Spark -->
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.java.dev.jna</groupId>
+                    <artifactId>jna</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>3.3.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.java.dev.jna</groupId>
+                    <artifactId>jna</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ghost4j</groupId>
+            <artifactId>ghost4j</artifactId>
+            <version>1.0.1</version>
+<!--
+            <exclusions>
+                <exclusion>
+                    <groupId>net.java.dev.jna</groupId>
+                    <artifactId>jna</artifactId>
+                </exclusion>
+            </exclusions>
+-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lowagie</groupId>
+                    <artifactId>itext</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+<!--
+        <dependency>
+            <groupId>org.ghost4j</groupId>
+            <artifactId>ghost4j</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+-->
+
+        <!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.52</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.52</version>
+        </dependency>
+
+
+        <!-- java.lang.NoClassDefFoundError: org/bouncycastle/asn1/ASN1OctetString -->
+<!--
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk14</artifactId>
+            <version>1.47</version>
+        </dependency>
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.bouncycastle/bcprov-ext-jdk14 &ndash;&gt;
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-ext-jdk14</artifactId>
+            <version>1.47</version>
+        </dependency>
+-->
+
+
+        <!-- https://mvnrepository.com/artifact/com.typesafe.scala-logging/scala-logging-slf4j_2.10 -->
+        <dependency>
+            <groupId>com.typesafe.scala-logging</groupId>
+            <artifactId>scala-logging-slf4j_2.10</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
+        <!-- conflicts with dependency jna from other libraries (spark core?)  -->
+        <!-- ghost4j uses ghostscript 4.1.0 -->
+
+        <!-- 4.1.0 error ghostscript AbstractMethodError: com.sun.jna.Structure.getFieldOrder()Ljava/util/List -->
+        <!-- 3.4.0 error NoSuchFieldError: RESOURCE_PREFIX -->
+        <!-- pdf to img >>>> 3.4.0 -->
+        <!-- img to txt >>>> 4.1.0 -->
+        <!--<dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.1.0</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch-spark-20_2.10 -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-spark-20_2.10</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.11</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.bytedeco/javacv-platform -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <!-- it has to be relocated to avoid guava dependency issues -->
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- disable surefire -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.7</version>
+              <configuration>
+                <skipTests>true</skipTests>
+              </configuration>
+            </plugin>
+            <!-- enable scalatest -->
+            <plugin>
+              <groupId>org.scalatest</groupId>
+              <artifactId>scalatest-maven-plugin</artifactId>
+              <version>1.0</version>
+              <configuration>
+                <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                <junitxml>.</junitxml>
+                <filereports>WDF TestSuite.txt</filereports>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>test</id>
+                  <goals>
+                    <goal>test</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
